@@ -1,4 +1,4 @@
-function whatsapp(){
+function Whatsapp(){
     return(
     <div>
         <h1>Minha Api whatsapp</h1>
@@ -6,4 +6,4 @@ function whatsapp(){
     )
 }
 
-export default whatsapp;
+export default Whatsapp;
