@@ -1,33 +1,22 @@
 import dynamic from "next/dynamic";
+const http = require('http');
+const url = require('url');
 
 function whatsapp(request,response){
-    // Verificar se o método de solicitação é POST
-    if (request.method === 'POST') {
-      // Ler os dados da solicitação
-      let requestData = '';
-      request.on('data', chunk => {
-        requestData += chunk;
-      });
+    const queryData = url.parse(request.url, true).query;
   
-      // Manipular os dados recebidos
-      request.on('end', () => {
-        // Converter os dados recebidos para um objeto JSON
-        const payload = JSON.parse(requestData);
+    // Acessar os parâmetros da solicitação GET
+    const parameter1 = queryData.parameter1;
+    const parameter2 = queryData.parameter2;
   
-        // Realizar ações com base nos dados recebidos
-        // Aqui você pode processar os dados recebidos e fazer o que for necessário, como salvar em um banco de dados, enviar notificações, etc.
+    // Realizar ações com base nos parâmetros recebidos
+    // Aqui você pode processar os parâmetros da solicitação e fazer o que for necessário
   
-        // Responder à solicitação
-        response.statusCode = 200;
-        response.setHeader('Content-Type', 'application/json');
-        response.end(JSON.stringify({ message: 'Webhook recebido com sucesso.' }));
-      });
-    } else {
-      // Método de solicitação inválido
-      response.statusCode = 405;
-      response.setHeader('Content-Type', 'text/plain');
-      response.end('Método não permitido. Utilize o método POST.');
-    }
+    // Responder à solicitação
+    response.statusCode = 200;
+    response.setHeader('Content-Type', 'text/plain');
+    response.end('Webhook GET recebido com sucesso.');
   }
+
 
 export default whatsapp;
